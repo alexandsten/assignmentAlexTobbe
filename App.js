@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 
-SplashScreen.preventAutoHideAsync();
+
 
 
 export default function App() {
@@ -15,7 +15,11 @@ export default function App() {
 
 
   return (
+    
     <NavigationContainer>
+      <View style={styles.container}>
+        <Text>Login start</Text>
+      </View>
       
        <SafeAreaView style={styles.container} >
     

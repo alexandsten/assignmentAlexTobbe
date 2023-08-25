@@ -6,7 +6,7 @@ export const Home = () => {
   const {handleLogout} = useContext(StartContext)
   return (
     <View style={{flex: 1}}>
-      <Text>Login</Text>
+      <Text>Main - home</Text>
       <Button title="Test login function" onPress={() => handleLogout()} />
     </View>
   )

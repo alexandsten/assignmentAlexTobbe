@@ -17,10 +17,6 @@ export default function App() {
   return (
     
     <NavigationContainer>
-      <View style={styles.container}>
-        <Text>Login start</Text>
-      </View>
-      
        <SafeAreaView style={styles.container} >
     
       <StartProvider>

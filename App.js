@@ -1,13 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Button, Text } from 'react-native';
+
 import 'react-native-gesture-handler';
+import { RootNav } from './navs/RootNav';
+import { StartProvider } from './contexts/StartContext';
+import { NavigationContainer } from '@react-navigation/native';
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
+
+SplashScreen.preventAutoHideAsync();
+
 
 export default function App() {
+
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      
+       <SafeAreaView style={styles.container} >
+    
+      <StartProvider>
+          <RootNav />
+      </StartProvider>  
+   
+    </SafeAreaView>
+    </NavigationContainer>
   );
 }
 

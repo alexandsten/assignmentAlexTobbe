@@ -5,7 +5,7 @@ console.log('Register')
 
 export const Register = () => {
   return (
-    <View style={styles.container}>
+    <View >
       <Text>Register</Text>
     </View>
   )

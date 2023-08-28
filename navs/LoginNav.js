@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 
 export default function LoginNav() {
   return (
-    <View>
+    <View style={{flex:1, backgroundColor:'blue', width:600}}>
         <Text>Login nav</Text>
         <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />

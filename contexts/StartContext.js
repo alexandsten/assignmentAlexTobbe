@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View } from 'react-native';
 
 export const StartContext = createContext()
 
@@ -49,6 +50,7 @@ export const StartProvider = ({children}) => {
   }, [])
 
   return (
+    
     <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout}}>
       {children}
     </StartContext.Provider>

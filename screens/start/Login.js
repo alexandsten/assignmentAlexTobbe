@@ -27,7 +27,11 @@ export const Login = () => {
 
 const styles = StyleSheet.create({
   container: {
-   
+    flex:1,
+    backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
+    
   },
   button: {
     flexDirection: 'row',
@@ -38,5 +42,10 @@ const styles = StyleSheet.create({
   }, logo: {
     width: 150, // Set the desired width for the image
     height: 150, // Set the desired height for the image
-  },
+  },input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 10,
+    marginVertical: 10,
+},
 });

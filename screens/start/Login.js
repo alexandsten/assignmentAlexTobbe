@@ -4,20 +4,20 @@ import { StartContext} from '../../contexts/StartContext';
 console.log('Login')
 
 export const Login = () => {
-  const { handleLogin, setAccessToken, accessToken } = useContext(StartContext);
+  const { handleLogin, setAccessToken, accessToken, userName, setUserName } = useContext(StartContext);
   const [textInputValue, setTextInputValue] = useState(''); // Local state for the input value
 
   return (
     <View style={styles.container}>
       <TextInput
-        value={textInputValue} // Use local state value for TextInput
+        value={userName} // Use local state value for TextInput
         style={styles.input}
         placeholder='batman'
-        onChangeText={(value) => setTextInputValue(value)} // Update local state value
+        onChangeText={(value) => setUserName(value)} // Update local state value
       />
       <Text>Login</Text>
       <Button title="Test" onPress={() => {
-        setAccessToken(textInputValue); // Update context state with the local state value
+     /*   setUserName(textInputValue); // Update context state with the local state value */
         handleLogin();
       }} />
     </View>

@@ -7,17 +7,42 @@ export const StartContext = createContext()
 
 export const StartProvider = ({children}) => {
   const [accessToken, setAccessToken] = useState('fel');
-  console.log(accessToken)
+  const [userName, setUserName] = useState();
+  const [userPassword, setUserPassword] = useState('');
   
-  const handleLogin = async () => {
-    console.log('handleLogin')
-
+  
+  const handleLogin = async () => {   // funktion som hämtar och bearbetar API'et
+    
     try {
-      // fetch accessToken...
+      console.log(userName)
+      
+      const response = await fetch(`https://chat-api-with-auth.up.railway.app/auth/token`, {
+
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify({
+        'username': userName,
+          'password': '123'
+      })
+      }
+      
+      
+      
+      );
+      const loginAPI = await response.json();
      
 
-      
-      console.log(accessToken)
+      /*
+      movieAPI.Search ?       // ternary operator som undersöker API'ets svar
+       
+      setMovieResponse(movieAPI.Search)
+      :
+      setMovieError(movieAPI.Error)  // felaktiga svar hämtar Error meddelande
+      */
+
+      console.log(loginAPI.message)
+      setAccessToken(loginAPI.accessToken)
     } catch(error) {
       console.log(error)
     }
@@ -51,7 +76,7 @@ export const StartProvider = ({children}) => {
 
   return (
     
-    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout}}>
+    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword}}>
       {children}
     </StartContext.Provider>
   )

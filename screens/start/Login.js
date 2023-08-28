@@ -1,25 +1,37 @@
 import React, {useContext, useState} from 'react'
 import {Text, View, Button, TouchableOpacity, TextInput, StyleSheet, useEffect} from 'react-native'
 import { StartContext} from '../../contexts/StartContext';
-console.log('Login')
 
-export const Login = () => {
-  const { handleLogin, setAccessToken, accessToken, userName, setUserName } = useContext(StartContext);
+
+export const Login = ({navigation}) => {
+  const { handleLogin, userName, setUserName, userPassword, setUserPassword, message } = useContext(StartContext);
   const [textInputValue, setTextInputValue] = useState(''); // Local state for the input value
+  
 
   return (
     <View style={styles.container}>
+      <Text>{message}</Text>
       <TextInput
         value={userName} // Use local state value for TextInput
         style={styles.input}
         placeholder='batman'
         onChangeText={(value) => setUserName(value)} // Update local state value
       />
+      <TextInput
+        value={userPassword} // Use local state value for TextInput
+        style={styles.input}
+        placeholder='batman'
+        onChangeText={(value) => setUserPassword(value)} // Update local state value
+      />
       <Text>Login</Text>
-      <Button title="Test" onPress={() => {
+      <Button title="Login" onPress={() => {
      /*   setUserName(textInputValue); // Update context state with the local state value */
         handleLogin();
       }} />
+      <Button
+        title="Register"
+        onPress={() => navigation.navigate('Register')}
+      />
     </View>
   );
 }

@@ -6,7 +6,7 @@ export const StartContext = createContext()
 
 
 export const StartProvider = ({children}) => {
-  const [accessToken, setAccessToken] = useState('fel');
+  const [accessToken, setAccessToken] = useState(null);
   const [userName, setUserName] = useState();
   const [userPassword, setUserPassword] = useState('');
   const [message, setMessage] = useState('');

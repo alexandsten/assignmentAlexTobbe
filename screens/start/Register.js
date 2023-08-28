@@ -7,6 +7,7 @@ export const Register = ({navigation}) => {
   const { userName, setUserName, userPassword, setUserPassword, setAccessToken } = useContext(StartContext);
   const [textInputValue, setTextInputValue] = useState(''); // Local state for the input value
   const [message, setMessage] = useState('');
+  const [registerCheck, setRegisterCheck] = useState(null);
 
   const handleRegister = async () => {   // funktion som hämtar och bearbetar API'et
     
@@ -28,13 +29,15 @@ export const Register = ({navigation}) => {
 
       console.log(loginAPI.message)
       loginAPI.status == '200' ? 
-      setAccessToken(loginAPI.accessToken)
+      setRegisterCheck('yes')
       :
       console.log('wrong!')
       setMessage(loginAPI.message)
     } catch(error) {
       console.log(error)
     }
+    registerCheck !== null ?
+        navigation.navigate('Login') : console.log('register not registered')
   }
 
 
@@ -56,6 +59,10 @@ export const Register = ({navigation}) => {
       <Button title="Register" onPress={() => {
      /*   setUserName(textInputValue); // Update context state with the local state value */
         handleRegister();
+
+        registerCheck !== null ?
+        navigation.navigate('Login') :
+        console.log('hello world')
       }} />
       <Button
         title="Login"

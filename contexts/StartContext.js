@@ -6,14 +6,17 @@ export const StartContext = createContext()
 
 export const StartProvider = ({children}) => {
   const [accessToken, setAccessToken] = useState(null);
+  const [userLogin, setuserLogin] = useState(null);
   
   const handleLogin = async () => {
     console.log('handleLogin')
 
     try {
       // fetch accessToken...
-      await AsyncStorage.setItem('accessToken', 'somehting')
-      setAccessToken('Somehting')
+      await AsyncStorage.setItem('accessToken', 'userLogin')
+
+      setAccessToken('userLogin')
+      console.log(userLogin)
     } catch(error) {
       console.log(error)
     }
@@ -32,10 +35,10 @@ export const StartProvider = ({children}) => {
 
   const isLoggedIn = async () => {
     console.log('isLoggedIn')
-
     try {
       const token = await AsyncStorage.getItem('accessToken')
       setAccessToken(token)
+      
     } catch(error) {
       console.log(error)
     }
@@ -46,7 +49,7 @@ export const StartProvider = ({children}) => {
   }, [])
 
   return (
-    <StartContext.Provider value={{accessToken, handleLogin, handleLogout}}>
+    <StartContext.Provider value={{accessToken, handleLogin, handleLogout, userLogin}}>
       {children}
     </StartContext.Provider>
   )

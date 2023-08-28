@@ -32,7 +32,8 @@ export const StartProvider = ({children}) => {
       console.log(loginAPI.message)
       loginAPI.status == '200' ? 
       setMessage('') &
-      setAccessToken(loginAPI.accessToken)
+      setAccessToken(loginAPI.data.accessToken)&
+      await AsyncStorage.setItem('accessToken', loginAPI.data.accessToken)
       :
       setMessage(loginAPI.message)
     } catch(error) {

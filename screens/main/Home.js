@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {Text, View, Button, StyleSheet} from 'react-native'
+import {Text, View, Button, StyleSheet, FlatList} from 'react-native'
 import { StartContext } from '../../contexts/StartContext'
 
 export const Home = () => {

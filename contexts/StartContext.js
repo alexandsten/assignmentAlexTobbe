@@ -9,7 +9,7 @@ export const StartProvider = ({children}) => {
   const [accessToken, setAccessToken] = useState('fel');
   const [userName, setUserName] = useState();
   const [userPassword, setUserPassword] = useState('');
-  
+  const [message, setMessage] = useState('');
   
   const handleLogin = async () => {   // funktion som hämtar och bearbetar API'et
     
@@ -23,26 +23,18 @@ export const StartProvider = ({children}) => {
         'Content-Type': 'application/json'
       }, body: JSON.stringify({
         'username': userName,
-          'password': '123'
+          'password': userPassword
       })
       }
-      
-      
-      
       );
       const loginAPI = await response.json();
-     
-
-      /*
-      movieAPI.Search ?       // ternary operator som undersöker API'ets svar
-       
-      setMovieResponse(movieAPI.Search)
-      :
-      setMovieError(movieAPI.Error)  // felaktiga svar hämtar Error meddelande
-      */
 
       console.log(loginAPI.message)
+      loginAPI.status == '200' ? 
+      setMessage('') &
       setAccessToken(loginAPI.accessToken)
+      :
+      setMessage(loginAPI.message)
     } catch(error) {
       console.log(error)
     }
@@ -76,7 +68,7 @@ export const StartProvider = ({children}) => {
 
   return (
     
-    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword}}>
+    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message}}>
       {children}
     </StartContext.Provider>
   )

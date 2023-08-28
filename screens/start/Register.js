@@ -1,23 +1,75 @@
-import React from 'react'
-import {Text, View, StyleSheet} from 'react-native'
+import React, {useContext, useState} from 'react'
+import {Text, View, StyleSheet, Button, TextInput} from 'react-native'
+import { StartContext} from '../../contexts/StartContext';
 
-console.log('Register')
 
-export const Register = () => {
+export const Register = ({navigation}) => {
+  const { userName, setUserName, userPassword, setUserPassword, setAccessToken } = useContext(StartContext);
+  const [textInputValue, setTextInputValue] = useState(''); // Local state for the input value
+  const [message, setMessage] = useState('');
+
+  const handleRegister = async () => {   // funktion som hämtar och bearbetar API'et
+    
+    try {
+      console.log(userName)
+      
+      const response = await fetch(`https://chat-api-with-auth.up.railway.app/auth/register`, {
+
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify({
+        'username': userName,
+          'password': userPassword
+      })
+      }
+      );
+      const loginAPI = await response.json();
+
+      console.log(loginAPI.message)
+      loginAPI.status == '200' ? 
+      setAccessToken(loginAPI.accessToken)
+      :
+      console.log('wrong!')
+      setMessage(loginAPI.message)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+
   return (
-    <View >
-      <Text>Register</Text>
+    <View  style={styles.container}>
+      <Text>{message}</Text>
+      <TextInput
+        value={userName} // Use local state value for TextInput
+        style={styles.input}
+        placeholder='batman'
+        onChangeText={(value) => setUserName(value)} // Update local state value
+      />
+      <TextInput
+        value={userPassword} // Use local state value for TextInput
+        style={styles.input}
+        placeholder='batman'
+        onChangeText={(value) => setUserPassword(value)} // Update local state value
+      />
+      <Button title="Register" onPress={() => {
+     /*   setUserName(textInputValue); // Update context state with the local state value */
+        handleRegister();
+      }} />
+      <Button
+        title="Login"
+        onPress={() => navigation.navigate('Login')}
+      />
     </View>
   )
 }
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-      justifyContent: 'space-between',
-      borderBottomWidth: 1,
-      borderBottomColor: '#999',
-      borderStyle: 'dashed',
-      padding: 10,
+    flex:1,
+    backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     flexDirection: 'row',
@@ -28,5 +80,10 @@ const styles = StyleSheet.create({
   }, logo: {
     width: 150, // Set the desired width for the image
     height: 150, // Set the desired height for the image
-  },
+  },input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 10,
+    marginVertical: 10,
+}
 });

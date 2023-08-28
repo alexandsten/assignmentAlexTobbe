@@ -15,16 +15,17 @@ export default function App() {
 
 
   return (
-    
+    <View style={styles.container} >
     <NavigationContainer>
-       <SafeAreaView style={styles.container} >
+      
     
       <StartProvider>
           <RootNav />
       </StartProvider>  
    
-    </SafeAreaView>
+    
     </NavigationContainer>
+    </View>
   );
 }
 

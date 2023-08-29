@@ -32,7 +32,7 @@ export const Register = ({navigation}) => {
       setRegisterCheck('yes')
       :
       console.log('wrong!')
-      setMessage(loginAPI.message)
+      setMessage(loginAPI.message) 
     } catch(error) {
       console.log(error)
     }

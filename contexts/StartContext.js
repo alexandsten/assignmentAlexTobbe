@@ -7,7 +7,7 @@ export const StartContext = createContext()
 
 export const StartProvider = ({children}) => {
   const [accessToken, setAccessToken] = useState(null);
-  const [userID, setUserId] = useState(null);
+  const [userID, setUserId] = useState();
   const [userName, setUserName] = useState();
   const [userPassword, setUserPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -72,7 +72,7 @@ export const StartProvider = ({children}) => {
 
   return (
     
-    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message}}>
+    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID}}>
       {children}
     </StartContext.Provider>
   )

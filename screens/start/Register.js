@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import {Text, View, StyleSheet, Button, TextInput} from 'react-native'
+import {Text, View, StyleSheet, Button, TextInput, SafeAreaView} from 'react-native'
 import { StartContext} from '../../contexts/StartContext';
 
 
@@ -42,7 +42,7 @@ export const Register = ({navigation}) => {
 
 
   return (
-    <View  style={styles.container}>
+    <SafeAreaView  style={styles.container}>
       <Text>{message}</Text>
       <Text
         style={{
@@ -77,12 +77,14 @@ export const Register = ({navigation}) => {
       />
       <Text style={styles.textInput}>Password</Text>
       <TextInput
-        value={userPassword} // Use local state value for TextInput
+        value={userPassword} 
+        secureTextEntry={true}
         style={styles.input}
         placeholder='batman'
         onChangeText={(value) => setUserPassword(value)} // Update local state value
       />
-      <Button title="Register" onPress={() => {
+      <Button title="Register" color="green"
+       onPress={() => {
      /*   setUserName(textInputValue); // Update context state with the local state value */
         handleRegister();
 
@@ -90,19 +92,22 @@ export const Register = ({navigation}) => {
         navigation.navigate('Login') :
         console.log('hello world')
       }} />
-      <Button
-        title="Login"
+      
+      <Button style={styles.button}
+        title="Already have an account? Login"
+        color="black"
         onPress={() => navigation.navigate('Login')}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({
   container: {
+    marginTop: 100,
     flex: 1,
   },
   button: {
-    
+    width: 10
   },
   input: {
     marginLeft: 25,

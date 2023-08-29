@@ -44,10 +44,11 @@ export const Chat = () => {
         data={chatData}
         keyExtractor={item => item._id}
         renderItem={({ item }) => (
-          <Text>{item.content}</Text>
+          <Text style={{    fontSize: 18,
+          }}>{item.content}</Text>
         )}
       />
-      <Button title="Test login function" onPress={() => handleLogout()} />
+      <Button title="Logout" onPress={() => handleLogout()} />
      
       
      
@@ -63,10 +64,11 @@ export const Chat = () => {
 const styles = StyleSheet.create({
     container: {
       flex:1,
-      backgroundColor: '#fff',
+      backgroundColor: 'white',
+
       
       
-      backgroundColor: 'pink'
+      
     },
     
   });

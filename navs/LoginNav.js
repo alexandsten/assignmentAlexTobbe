@@ -9,8 +9,13 @@ export default function LoginNav() {
   return (
     <View style={{flex:1}}>
         <Text>Login nav</Text>
-        <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}>
+        <Stack.Screen name="Login" component={Login}
+        
+         />
         <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
     </View>

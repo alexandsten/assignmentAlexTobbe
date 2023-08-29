@@ -62,6 +62,8 @@ export const Login = ({ navigation }) => {
       <TextInput
         value={userPassword} // Use local state value for TextInput
         style={styles.input}
+        type= 'password'
+        secureTextEntry={true}
         placeholder="batman"
         onChangeText={(value) => setUserPassword(value)} // Update local state value
       />
@@ -69,6 +71,7 @@ export const Login = ({ navigation }) => {
         <Button
           style={styles.button}
           title="Login"
+          color="green"
           onPress={() => {
             /*   setUserName(textInputValue); // Update context state with the local state value */
             handleLogin();
@@ -76,7 +79,8 @@ export const Login = ({ navigation }) => {
         />
         <Button
           style={styles.button}
-          title="Register"
+          title="Don't have an account? Register"
+          color="black"
           onPress={() => navigation.navigate("Register")}
         />
       </View>
@@ -87,9 +91,10 @@ export const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 100,
   },
   button: {
-    backgroundColor: "white",
+    backgroundColor: "#aaa",
   },
   input: {
     marginLeft: 25,
@@ -104,8 +109,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttonGroup: {
-  
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
   },
   textInput: {

@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: "#aaa",
+    
   },
   input: {
     marginLeft: 25,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttonGroup: {
-    flex: 1,
+    
     flexDirection:"row",
     justifyContent: 'center',
     

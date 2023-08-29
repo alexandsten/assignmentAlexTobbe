@@ -7,6 +7,7 @@ export const StartContext = createContext()
 
 export const StartProvider = ({children}) => {
   const [accessToken, setAccessToken] = useState(null);
+  const [userID, setUserId] = useState(null);
   const [userName, setUserName] = useState();
   const [userPassword, setUserPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -32,6 +33,8 @@ export const StartProvider = ({children}) => {
       console.log(loginAPI.message)
       loginAPI.status == '200' ? 
       setMessage('') &
+      setUserId(loginAPI.data._id)&
+      await AsyncStorage.setItem('userID', loginAPI.data.accessToken) &
       setAccessToken(loginAPI.data.accessToken)&
       await AsyncStorage.setItem('accessToken', loginAPI.data.accessToken)
       :

@@ -4,7 +4,8 @@ import { StartContext } from '../../contexts/StartContext';
 
 export const Chat = () => {
   const { handleLogout, accessToken, userID } = useContext(StartContext);
-  const [chatData, setChatData] = useState([]);
+  const [chatData, setChatData] = useState(``);
+ 
 
   const handleChat = async () => {
     try {
@@ -15,8 +16,9 @@ export const Chat = () => {
         },
       });
       const chatAPI = await response.json();
-      console.log('mitt it är' + userID)
+      console.log('mitt it är ' + userID)
       setChatData(chatAPI.data);
+      
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +26,7 @@ export const Chat = () => {
 
   useEffect(() => {
     handleChat();
-  }, []);
+  }, [2]);
 
   return (
     <View style={styles.container}>
@@ -32,19 +34,25 @@ export const Chat = () => {
       <FlatList
         style={{ flex: 1 }}
         data={chatData}
+        
         keyExtractor={item => item._id}
         renderItem={({ item }) => (
-          <Text>{item.content}</Text>
+          
+          item.user  ?
+          <Text
+          style={[
+            styles.messageText,
+            { textAlign: userID == item.user._id ? 'left' : 'right' },
+          ]}
+        >
+          {item.content}
+        </Text> :
+          <Text>Nä</Text>
+      
         )}
       />
       <Button title="Test login function" onPress={() => handleLogout()} />
-     
-      
-     
-      
-      
-     
-      
+
     </View>
   );
 };

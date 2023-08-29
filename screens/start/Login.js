@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   buttonGroup: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
   },
   textInput: {

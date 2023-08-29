@@ -1,63 +1,119 @@
-import React, {useContext, useState} from 'react'
-import {Text, View, Button, TouchableOpacity, TextInput, StyleSheet, useEffect} from 'react-native'
-import { StartContext} from '../../contexts/StartContext';
+import React, { useContext, useState } from "react";
 
+import {
+  Text,
+  SafeAreaView,
+  View,
+  Button,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  useEffect,
+} from "react-native";
+import { StartContext } from "../../contexts/StartContext";
 
-export const Login = ({navigation}) => {
-  const { handleLogin, userName, setUserName, userPassword, setUserPassword, message } = useContext(StartContext);
-  const [textInputValue, setTextInputValue] = useState(''); // Local state for the input value
-  
+export const Login = ({ navigation }) => {
+  const {
+    handleLogin,
+    userName,
+    setUserName,
+    userPassword,
+    setUserPassword,
+    message,
+  } = useContext(StartContext);
+  const [textInputValue, setTextInputValue] = useState(""); // Local state for the input value
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text>{message}</Text>
+      <Text
+        style={{
+          color: "black",
+          fontSize: 40,
+          fontWeight: "bold",
+          marginLeft: 15,
+          marginRight: 15,
+        }}
+      >
+        Login
+      </Text>
+      <Text
+        style={{
+          color: "grey",
+          fontSize: 16,
+          marginTop: 10,
+          marginBottom: 25,
+
+          marginLeft: 15,
+          marginRight: 15,
+        }}
+      >
+        Enter Your Details to Login
+      </Text>
+      <Text style={styles.textInput}>Username</Text>
+      <View style={{ marginTop: 5 }}></View>
       <TextInput
         value={userName} // Use local state value for TextInput
         style={styles.input}
-        placeholder='batman'
+        placeholder="batman"
         onChangeText={(value) => setUserName(value)} // Update local state value
       />
+      <Text style={styles.textInput}>Password</Text>
       <TextInput
         value={userPassword} // Use local state value for TextInput
         style={styles.input}
-        placeholder='batman'
+        placeholder="batman"
         onChangeText={(value) => setUserPassword(value)} // Update local state value
       />
-      <Text>Login</Text>
-      <Button title="Login" onPress={() => {
-     /*   setUserName(textInputValue); // Update context state with the local state value */
-        handleLogin();
-      }} />
-      <Button
-        title="Register"
-        onPress={() => navigation.navigate('Register')}
-      />
-    </View>
+      <View style={styles.buttonGroup}>
+        <Button
+          style={styles.button}
+          title="Login"
+          onPress={() => {
+            /*   setUserName(textInputValue); // Update context state with the local state value */
+            handleLogin();
+          }}
+        />
+        <Button
+          style={styles.button}
+          title="Register"
+          onPress={() => navigation.navigate("Register")}
+        />
+      </View>
+    </SafeAreaView>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    backgroundColor: 'blue',
-    alignItems: 'center',
-    justifyContent: 'center',
-    
+    flex: 1,
   },
   button: {
-    flexDirection: 'row',
-    backgroundColor: '#b8bff7',
-    justifyContent: 'space-between',
-    width: 60,
-    height: 40
-  }, logo: {
-    width: 150, // Set the desired width for the image
-    height: 150, // Set the desired height for the image
-  },input: {
+    backgroundColor: "#aaa",
+  },
+  input: {
+    marginLeft: 25,
+    marginRight: 25,
     borderWidth: 1,
-    borderColor: 'black',
-    padding: 10,
+    borderRadius: 10,
+    borderColor: "black",
+    padding: 18,
+    backgroundColor: "#EBE9E9",
+    marginHorizontal: 15,
+    borderWidth: 0.5,
     marginVertical: 10,
-},
+  },
+  buttonGroup: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  textInput: {
+    color: "grey",
+    fontSize: 14,
+    marginTop: 10,
+
+    marginLeft: 15,
+    marginRight: 15,
+  },
 });

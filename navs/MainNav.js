@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 
 export default function MainNav() {
   return (
-    <View style={{flex:1, backgroundColor:'pink', width:300}}>
+    <View style={{flex:1, backgroundColor:'pink'}}>
         <Text>Main nav</Text>
         <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />

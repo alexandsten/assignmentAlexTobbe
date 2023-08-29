@@ -34,31 +34,28 @@ export const Chat = () => {
         data={chatData}
         keyExtractor={item => item._id}
         renderItem={({ item }) => (
-          <Text
-            style={[
-              styles.messageText,
-              { textAlign: userID == item._id? 'left' : 'right' },
-            ]}
-          >
-            {item.content}
-          </Text>
+          <Text>{item.content}</Text>
         )}
       />
       <Button title="Test login function" onPress={() => handleLogout()} />
+     
+      
+     
+      
+      
+     
+      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    backgroundColor: 'pink',
-  },
-  messageText: {
-    marginVertical: 5,
-    marginHorizontal: 10,
-  },
-
-});
-
+    container: {
+      flex:1,
+      backgroundColor: '#fff',
+      
+      
+      backgroundColor: 'pink'
+    },
+    
+  });

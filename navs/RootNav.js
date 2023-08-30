@@ -4,6 +4,7 @@ import {View} from 'react-native'
 import { StartContext } from '../contexts/StartContext';
 import MainNav from './MainNav';
 import LoginNav from './LoginNav';
+import DrawerNav from './DrawerNav';
 
 
 export const RootNav = () => {
@@ -11,6 +12,7 @@ export const RootNav = () => {
 
   return (
     <>
+    
       {
         accessToken !== null
           ? <MainNav />

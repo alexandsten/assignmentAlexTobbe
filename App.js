@@ -6,6 +6,7 @@ import { StartProvider } from './contexts/StartContext';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
+import DrawerNav from './navs/DrawerNav';
 
 
 

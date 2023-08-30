@@ -14,7 +14,7 @@ export default function MainNav() {
         <Text>Main nav</Text>
         <Stack.Navigator>
           
-        <Stack.Screen name="Chat" component={DrawerNav} />
+        <Stack.Screen name="Drawer" component={DrawerNav} />
         <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
     </View>

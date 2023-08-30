@@ -9,6 +9,8 @@ import {
   TextInput,
   StyleSheet,
   useEffect,
+  Pressables,
+  Pressable
 } from "react-native";
 import { StartContext } from "../../contexts/StartContext";
 
@@ -41,7 +43,7 @@ export const Login = ({ navigation }) => {
         style={{
           color: "grey",
           fontSize: 16,
-          marginTop: 10,
+          marginTop: 15,
           marginBottom: 25,
 
           marginLeft: 15,
@@ -62,27 +64,35 @@ export const Login = ({ navigation }) => {
       <TextInput
         value={userPassword} // Use local state value for TextInput
         style={styles.input}
-        type= 'password'
+        type="password"
         secureTextEntry={true}
         placeholder="batman"
         onChangeText={(value) => setUserPassword(value)} // Update local state value
       />
       <View style={styles.buttonGroup}>
-        <Button
-          style={styles.button}
-          title="Login"
-          color="green"
+        <Pressable style={{
+         width: 200,
+         backgroundColor: '#4A55A2',
+         padding: 15,
+         marginTop: 30,
+         marginLeft: 'auto',
+         marginRight: 'auto',
+         borderRadius: 6   
+        }}
+         
           onPress={() => {
             /*   setUserName(textInputValue); // Update context state with the local state value */
             handleLogin();
           }}
-        />
-        <Button
-          style={styles.button}
-          title="Don't have an account? Register"
-          color="black"
-          onPress={() => navigation.navigate("Register")}
-        />
+        >
+        <Text style={{textAlign: 'center', color: "white", fontSize: 16, fontWeight: 'bold'}} >LogIn</Text>
+        </Pressable>
+        <Pressable style={{marginTop: 15}}
+        
+        onPress={() => navigation.navigate('Register')}
+      >
+      <Text style={{textAlign: 'center', color: 'gray', fontSize: 16}}>Don't have an account? Sign up</Text>
+      </Pressable>
       </View>
     </SafeAreaView>
   );

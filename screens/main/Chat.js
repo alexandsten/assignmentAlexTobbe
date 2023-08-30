@@ -68,7 +68,7 @@ export const Chat = () => {
             backgroundColor: userID === item.user._id ? 'green' : 'blue',
             padding: 10, borderRadius: 10, marginBottom: 5, maxWidth: '100%',color: 'white' },
           ]}
-        >
+        > {item.user.username} : 
           {item.content}
         </Text> :
           <Text>Nä</Text>

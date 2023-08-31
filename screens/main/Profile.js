@@ -4,12 +4,16 @@ import { useContext, useState } from "react";
 import { StartContext } from "../../contexts/StartContext";
 
 export const Profile = () => {
-  const { userID, userName, handleLogout, handleUpdateUsername } = useContext(StartContext);
+  const { userID, userName, handleLogout, handleUpdateUsername, firstName, lastName } = useContext(StartContext);
   const [newUserName, setNewUserName] = useState('');
   const [newLastName, setNewLastName] = useState('');
 
   return (
     <SafeAreaView>
+
+
+      <Text style={{ fontSize: 20 }}> {firstName} {lastName} </Text>
+
       <Text style={{ fontSize: 20 }}> First name: </Text>
       <TextInput
         style={styles.input}

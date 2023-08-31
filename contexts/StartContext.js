@@ -11,6 +11,9 @@ export const StartProvider = ({children}) => {
   const [userName, setUserName] = useState();
   const [userPassword, setUserPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   
   const handleLogin = async () => {   // funktion som hämtar och bearbetar API'et
     
@@ -39,6 +42,11 @@ export const StartProvider = ({children}) => {
       await AsyncStorage.setItem('accessToken', loginAPI.data.accessToken)
       :
       setMessage(loginAPI.message)
+
+      loginAPI.data.username ? 
+      setFirstName(loginAPI.data.username) & setLastName(loginAPI.data.lastname) :
+      console.log("namn finns ej")
+
     } catch(error) {
       console.log(error)
     }
@@ -87,6 +95,8 @@ export const StartProvider = ({children}) => {
       });
       if (response.status === 200) {
         console.log("du har uppdaterat ditt namn")
+        setFirstName(newUserName)
+        setLastName(newLastName)
       } else {
         console.log("Error updating username");
       }
@@ -99,7 +109,7 @@ export const StartProvider = ({children}) => {
 
   return (
     
-    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID, handleUpdateUsername}}>
+    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID, handleUpdateUsername, firstName, lastName}}>
       {children}
     </StartContext.Provider>
   )

@@ -5,7 +5,8 @@ import { StartContext } from "../../contexts/StartContext";
 
 export const Profile = () => {
   const { userID, userName, handleLogout, handleUpdateUsername } = useContext(StartContext);
-  const [newUserName, setNewUserName] = useState(userName);
+  const [newUserName, setNewUserName] = useState('');
+  const [newLastName, setNewLastName] = useState('');
 
   return (
     <SafeAreaView>
@@ -16,10 +17,17 @@ export const Profile = () => {
         onChangeText={setNewUserName}
       />
 
+<Text style={{ fontSize: 20 }}> Last name: </Text>
+      <TextInput
+        style={styles.input}
+        value={newLastName}
+        onChangeText={setNewLastName}
+      />
+
 <Pressable
         style={styles.button}
         onPress={() => {
-          handleUpdateUsername(newUserName);
+          handleUpdateUsername(newUserName, newLastName);
         }}
       >
         <Text
@@ -30,7 +38,7 @@ export const Profile = () => {
             fontWeight: "bold",
           }}
         >
-          Update your firstname
+          Update your name
         </Text>
       </Pressable>
 

@@ -47,6 +47,21 @@ export const Chat = () => {
     }
   };
 
+
+  const deleteChat = async (messageID) => {
+    try {
+      const response = await fetch(`https://chat-api-with-auth.up.railway.app/messages/${messageID}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + accessToken,
+        },
+      });
+      handleChat()
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     handleChat();
   }, []);
@@ -62,7 +77,8 @@ export const Chat = () => {
         keyExtractor={item => item._id}
         renderItem={({ item }) => (
           
-          item.user  ?
+          item.user  ? 
+         
           <Text
           style={[
             styles.messageText,
@@ -70,9 +86,17 @@ export const Chat = () => {
             backgroundColor: userID === item.user._id ? 'green' : 'blue',
             padding: 10, borderRadius: 10, marginBottom: 5, maxWidth: '100%',color: 'white' },
           ]}
+        
+          onPress={() => {
+            /*   setUserName(textInputValue); // Update context state with the local state value */
+            deleteChat(item._id);
+          }}
+        
         > {item.user.username} : 
           {item.content}
-        </Text> :
+        </Text> 
+     
+        :
           <Text>Nä</Text>
       
         )}

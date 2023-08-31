@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { StartContext } from "../../contexts/StartContext";
 
 export const Profile = () => {
-  const { userID, userName, handleLogout, handleUpdateUsername, firstName, lastName } = useContext(StartContext);
+  const { handleLogout, handleUpdateUsername, firstName, lastName } = useContext(StartContext);
   const [newUserName, setNewUserName] = useState('');
   const [newLastName, setNewLastName] = useState('');
 

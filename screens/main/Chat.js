@@ -56,7 +56,9 @@ export const Chat = () => {
           'Authorization': 'Bearer ' + accessToken,
         },
       });
-      handleChat()
+      if (response.status === 200) {alert('Meddelande raderat')
+      handleChat()} else console.log('Något gick fel med att radera meddelandet')
+      
     } catch (error) {
       console.log(error);
     }

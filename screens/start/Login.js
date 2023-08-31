@@ -37,7 +37,7 @@ export const Login = ({ navigation }) => {
           marginRight: 15,
         }}
       >
-        Login
+        Sign in
       </Text>
       <Text
         style={{
@@ -70,15 +70,7 @@ export const Login = ({ navigation }) => {
         onChangeText={(value) => setUserPassword(value)} // Update local state value
       />
       <View style={styles.buttonGroup}>
-        <Pressable style={{
-         width: 200,
-         backgroundColor: '#4A55A2',
-         padding: 15,
-         marginTop: 30,
-         marginLeft: 'auto',
-         marginRight: 'auto',
-         borderRadius: 6   
-        }}
+        <Pressable style={styles.button}
          
           onPress={() => {
             /*   setUserName(textInputValue); // Update context state with the local state value */
@@ -103,9 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 100,
   },
-  button: {
-    backgroundColor: "#aaa",
-  },
+
   input: {
     marginLeft: 25,
     marginRight: 25,
@@ -118,6 +108,14 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     marginVertical: 10,
   },
+  button:{ width: 200,
+    backgroundColor: 'red',
+    padding: 15,
+    marginTop: 30,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    borderRadius: 6  
+    },
   buttonGroup: {
     flexDirection: "column",
     justifyContent: "center",

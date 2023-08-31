@@ -1,12 +1,39 @@
 import React from "react";
-import { View, Text, SafeAreaView, Pressable, TextInput } from "react-native";
+import { View, Text, SafeAreaView, Pressable, TextInput, Button } from "react-native";
 import { useContext, useState } from "react";
 import { StartContext } from "../../contexts/StartContext";
 
 export const Profile = () => {
-  const { handleLogout, handleUpdateUsername, firstName, lastName } = useContext(StartContext);
+  const { handleLogout, handleUpdateUsername, firstName, lastName, accessToken, setAccessToken } = useContext(StartContext);
   const [newUserName, setNewUserName] = useState('');
   const [newLastName, setNewLastName] = useState('');
+
+
+  const handleDelete = async () => {
+    // funktion som hämtar och bearbetar API'et
+
+    try {
+      const response = await fetch(
+        `https://chat-api-with-auth.up.railway.app/users`,
+        {
+          method: "DELETE",
+          headers: {
+            'Authorization': 'Bearer ' + accessToken,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("du har raderat ditt konto")
+        setAccessToken(null)
+      } else {
+        console.log("Något gick fel");
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -61,6 +88,24 @@ export const Profile = () => {
           }}
         >
           LogOut
+        </Text>
+      </Pressable>
+
+      <Pressable
+        style={styles.button}
+        onPress={() => {
+          handleDelete();
+        }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            color: "white",
+            fontSize: 16,
+            fontWeight: "bold",
+          }}
+        >
+          Delete account
         </Text>
       </Pressable>
     </SafeAreaView>

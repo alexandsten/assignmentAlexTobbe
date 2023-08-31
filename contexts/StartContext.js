@@ -69,12 +69,37 @@ export const StartProvider = ({children}) => {
   useEffect(() => {
     isLoggedIn();
   }, [])
+  
+  const handleUpdateUsername = async (newUsername) => {
+    console.log("New Username:", newUsername);
+    try {
+      const response = await fetch(`https://chat-api-with-auth.up.railway.app/users/${userID}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          'username': newUsername
+        }) 
+      });
+      if (response.status === 200) {
+        setUserName(newUsername); 
+      } else {
+        console.log("Error updating username");
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     
-    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID}}>
+    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID, handleUpdateUsername}}>
       {children}
     </StartContext.Provider>
   )
-
+  
 }

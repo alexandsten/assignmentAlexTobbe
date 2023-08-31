@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, FlatList, TextInput } from 'react-native';
 import { StartContext } from '../../contexts/StartContext';
-import DrawerNav from '../../navs/DrawerNav';
-import TabNav from '../../navs/TabNav';
+
 
 export const Chat = () => {
   const { handleLogout, accessToken, userID } = useContext(StartContext);
@@ -92,7 +91,7 @@ export const Chat = () => {
             sendChat();
           }}
         />
-      <Button title="Log Out" onPress={() => handleLogout()} />
+      
           
     </View>
   );

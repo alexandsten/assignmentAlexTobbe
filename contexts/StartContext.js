@@ -70,8 +70,8 @@ export const StartProvider = ({children}) => {
     isLoggedIn();
   }, [])
   
-  const handleUpdateUsername = async (newUsername) => {
-    console.log("New Username:", newUsername);
+  const handleUpdateUsername = async (newUserName, newLastName) => {
+    console.log("New Username:", newUserName);
     try {
       const response = await fetch(`https://chat-api-with-auth.up.railway.app/users/`, {
         method: 'PATCH',
@@ -80,8 +80,8 @@ export const StartProvider = ({children}) => {
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          "firstname": newUsername,
-          "lastname": "Doe",
+          "firstname": newUserName,
+          "lastname": newLastName,
            "image": "some-image"
         }) 
       });

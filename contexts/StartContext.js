@@ -73,18 +73,20 @@ export const StartProvider = ({children}) => {
   const handleUpdateUsername = async (newUsername) => {
     console.log("New Username:", newUsername);
     try {
-      const response = await fetch(`https://chat-api-with-auth.up.railway.app/users/${userID}`, {
+      const response = await fetch(`https://chat-api-with-auth.up.railway.app/users/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          'username': newUsername
+          "firstname": newUsername,
+          "lastname": "Doe",
+           "image": "some-image"
         }) 
       });
       if (response.status === 200) {
-        setUserName(newUsername); 
+        console.log("du har uppdaterat ditt namn")
       } else {
         console.log("Error updating username");
       }

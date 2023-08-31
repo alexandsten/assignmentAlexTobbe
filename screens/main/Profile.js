@@ -9,7 +9,7 @@ export const Profile = () => {
 
   return (
     <SafeAreaView>
-      <Text style={{ fontSize: 20 }}> {userName}</Text>
+      <Text style={{ fontSize: 20 }}> First name: </Text>
       <TextInput
         style={styles.input}
         value={newUserName}
@@ -30,7 +30,7 @@ export const Profile = () => {
             fontWeight: "bold",
           }}
         >
-          Update Username
+          Update your firstname
         </Text>
       </Pressable>
 
@@ -64,5 +64,16 @@ styles = {
     marginLeft: "auto",
     marginRight: "auto",
     borderRadius: 6,
-  },
+  },input: {
+    marginLeft: 25,
+    marginRight: 25,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "black",
+    padding: 18,
+    backgroundColor: "#EBE9E9",
+    marginHorizontal: 15,
+    borderWidth: 0.5,
+    marginVertical: 10,
+  }
 };

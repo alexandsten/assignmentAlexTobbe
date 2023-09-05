@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View, SafeAreaView, Text } from 'react-native';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome for camera icons
 import { Camera } from 'expo-camera';
-import { useFocusEffect } from '@react-navigation/native'; // Import the useFocusEffect hook
+import { useFocusEffect } from '@react-navigation/native';
 
 export const CameraView = ({ navigation }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+  const [flash, setFlash] = useState('off'); // Updated to use flash modes as strings
   const [camera, setCamera] = useState(null);
 
   useEffect(() => {
@@ -42,13 +42,12 @@ export const CameraView = ({ navigation }) => {
 
   const toggleFlash = () => {
     setFlash(currentFlash =>
-      currentFlash === Camera.Constants.FlashMode.off
-        ? Camera.Constants.FlashMode.on
-        : Camera.Constants.FlashMode.off
+      currentFlash === 'off'
+        ? 'on'
+        : 'off'
     );
   };
 
-  // Use useFocusEffect to reinitialize the camera when the component gains focus
   useFocusEffect(
     React.useCallback(() => {
       // Reinitialize the camera here
@@ -69,7 +68,7 @@ export const CameraView = ({ navigation }) => {
           <Camera
             style={styles.cameraContainer}
             type={type}
-            flashMode={flash}
+            flashMode={flash} // Use flash state here
             onCameraReady={onCameraReady}
             ref={ref => setCamera(ref)}
           />
@@ -77,28 +76,57 @@ export const CameraView = ({ navigation }) => {
             <TouchableOpacity style={styles.cameraButton} onPress={() => takePicture()}>
               <FontAwesome name="camera" size={40} color="white" />
             </TouchableOpacity>
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={toggleFlash}>
+                <FontAwesome
+                  name={flash === 'off' ? 'flash' : 'flash'}
+                  size={30}
+                  color="white"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={toggleCameraType}>
+                <FontAwesome
+                  name={type === Camera.Constants.Type.back ? 'camera' : 'camera-retro'}
+                  size={30}
+                  color="white"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       )}
     </SafeAreaView>
   );
 };
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'black',
-    },
-    cameraContainer: {
-      flex: 1,
-    },
-    buttonContainer: {
-      position: 'absolute',
-      bottom: 20,
-      alignSelf: 'center',
-    },
-    cameraButton: {
-      backgroundColor: 'transparent',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  cameraContainer: {
+    flex: 1,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cameraButton: {
+    backgroundColor: 'transparent',
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: 'white',
+    padding: 15,
+    marginHorizontal: 50,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 50,
+  },
+});

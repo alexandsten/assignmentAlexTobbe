@@ -25,7 +25,7 @@ export const ImagePreview = ({route, navigation}) => {
       }
 
       setPicture(null);
-      navigation.navigate("CameraView"); // Navigate back to the CameraView component
+      navigation.navigate("Profil"); // Navigate back to the CameraView component
     } catch (error) {
       console.log(error);
     }

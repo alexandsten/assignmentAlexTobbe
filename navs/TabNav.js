@@ -13,8 +13,7 @@ export default function TabNav() {
    
     <Tab.Navigator>
         <Tab.Screen name="Profile" component={Profile}/> 
-        <Tab.Screen name="CameraView" component={CameraView}/>  
-        <Tab.Screen name="ImagePreview" component={ImagePreview}/>  
+       
     </Tab.Navigator> 
   );
 }

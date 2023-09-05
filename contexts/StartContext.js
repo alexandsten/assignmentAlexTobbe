@@ -14,6 +14,8 @@ export const StartProvider = ({children}) => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+
+  const [picture, setPicture] = useState(null);
   
   const handleLogin = async () => {   // funktion som hämtar och bearbetar API'et
     
@@ -109,7 +111,7 @@ export const StartProvider = ({children}) => {
 
   return (
     
-    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID, handleUpdateUsername, firstName, lastName}}>
+    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID, handleUpdateUsername, firstName, lastName, picture, setPicture}}>
       {children}
     </StartContext.Provider>
   )

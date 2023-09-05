@@ -1,22 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View, SafeAreaView, Text } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome for camera icons
-import { Camera } from 'expo-camera';
+import { FontAwesome, Entypo, Feather } from '@expo/vector-icons'; // Import FontAwesome for camera icons
+import { Camera, CameraType, FlashMode } from 'expo-camera';
 import { useFocusEffect } from '@react-navigation/native';
+import * as MediaLibrary from 'expo-media-library';
 
 export const CameraView = ({ navigation }) => {
-  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [flash, setFlash] = useState('off'); // Updated to use flash modes as strings
+  const [flash, setFlash] = useState(FlashMode.on); // Updated to use flash modes as strings
   const [camera, setCamera] = useState(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [hasMediaPermission, setHasMediaPermission] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(status === 'granted');
+      const CameraPermissions = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(CameraPermissions.status == 'granted')
+      const MediaPermissions = await MediaLibrary.requestPermissionsAsync();
+      setHasMediaPermission(MediaPermissions.status == 'granted')
+      // console.log(CameraPermissions);
+      // console.log(MediaPermissions);
     })();
-  }, []);
-
+  });
   const onCameraReady = () => {
     // Camera is ready, you can now take pictures
   };
@@ -41,11 +47,7 @@ export const CameraView = ({ navigation }) => {
   };
 
   const toggleFlash = () => {
-    setFlash(currentFlash =>
-      currentFlash === 'off'
-        ? 'on'
-        : 'off'
-    );
+    setFlash(current => (current === FlashMode.off ? FlashMode.on : FlashMode.off));
   };
 
   useFocusEffect(
@@ -68,7 +70,7 @@ export const CameraView = ({ navigation }) => {
           <Camera
             style={styles.cameraContainer}
             type={type}
-            flashMode={flash} // Use flash state here
+            flashMode={flash}  // Use flash state here
             onCameraReady={onCameraReady}
             ref={ref => setCamera(ref)}
           />
@@ -77,13 +79,9 @@ export const CameraView = ({ navigation }) => {
               <FontAwesome name="camera" size={40} color="white" />
             </TouchableOpacity>
             <View style={styles.iconContainer}>
-              <TouchableOpacity onPress={toggleFlash}>
-                <FontAwesome
-                  name={flash === 'off' ? 'flash' : 'flash'}
-                  size={30}
-                  color="white"
-                />
-              </TouchableOpacity>
+            <TouchableOpacity style={styles.generalButton}>
+              <Entypo name="flash" size={24} color={flash === FlashMode.on ? "yellow" : "white"} onPress={() => toggleFlash()}/>
+            </TouchableOpacity>
               <TouchableOpacity onPress={toggleCameraType}>
                 <FontAwesome
                   name={type === Camera.Constants.Type.back ? 'camera' : 'camera-retro'}

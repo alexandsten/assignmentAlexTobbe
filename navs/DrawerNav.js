@@ -12,7 +12,7 @@ export default function DrawerNav() {
     <Drawer.Navigator>
       
       <Drawer.Screen name="Chat" component={Chat} />
-           <Drawer.Screen name="Profil" component={TabNav} />
+      <Drawer.Screen name="Profil" component={TabNav} />
       
     </Drawer.Navigator>
   );

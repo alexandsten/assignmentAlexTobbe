@@ -32,7 +32,9 @@ export const ImagePreview = ({route, navigation}) => {
   };
 
   return (
+    
     <SafeAreaView style={styles.container}>
+      
       <Image source={{ uri: picture.uri }} style={{ flex: 1 }} />
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.generalButton}>

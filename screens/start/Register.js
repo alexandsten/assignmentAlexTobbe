@@ -44,10 +44,13 @@ export const Register = ({ navigation }) => {
       const loginAPI = await response.json();
 
       console.log(loginAPI.message);
-      loginAPI.status == "200"
-        ? setRegisterCheck("yes")
-        : console.log("wrong!");
-      setMessage(loginAPI.message);
+      if( loginAPI.status == "200") {
+        setRegisterCheck("yes")
+        navigation.navigate("Login");
+      } else {
+         console.log("wrong!");
+         setMessage(loginAPI.message);
+      }
     } catch (error) {
       console.log(error);
     }

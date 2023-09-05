@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, SafeAreaView, Text, Image, TouchableOpacity } from 'react-native';
 import { Entypo, Feather } from '@expo/vector-icons';
 import * as MediaLibrary from 'expo-media-library';
 
-import { StartContext } from '../../contexts/StartContext';
-
-export const ImagePreview = ({route, navigation}) => {
-  const { picture } = route.params;
-  const { setPicture } = useContext(StartContext);
+export const ImagePreview = ({ route, navigation }) => {
+  const [picture, setPicture] = useState(route.params.picture);
 
   const savePicture = async () => {
     try {
@@ -24,6 +21,7 @@ export const ImagePreview = ({route, navigation}) => {
         await MediaLibrary.addAssetsToAlbumAsync(asset, album.id, false);
       }
 
+      // Clear the picture state
       setPicture(null);
       navigation.navigate("Profil"); // Navigate back to the CameraView component
     } catch (error) {
@@ -31,24 +29,31 @@ export const ImagePreview = ({route, navigation}) => {
     }
   };
 
+  const deletePicture = () => {
+    // Clear the picture state
+    setPicture(null);
+    navigation.goBack();
+  };
+
   return (
-    
     <SafeAreaView style={styles.container}>
-      
-      <Image source={{ uri: picture.uri }} style={{ flex: 1 }} />
+      {picture && picture.uri ? (
+        <Image source={{ uri: picture.uri }} style={{ flex: 1 }} />
+      ) : (
+        <Text>No image to display</Text>
+      )}
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.generalButton}>
-          <Feather name="trash-2" size={30} color="white" onPress={() => setPicture(null)} />
+        <TouchableOpacity style={styles.generalButton} onPress={deletePicture}>
+          <Feather name="trash-2" size={30} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.generalButton}>
-          <Entypo name="check" size={30} color="white" onPress={() => savePicture()} />
+        <TouchableOpacity style={styles.generalButton} onPress={savePicture}>
+          <Entypo name="check" size={30} color="white" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-export default ImagePreview;
 
 const styles = StyleSheet.create({
     container: {

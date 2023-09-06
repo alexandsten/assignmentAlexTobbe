@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     container: {
       flex:1,
       backgroundColor: '#fff',   
-      backgroundColor: 'pink'
+      backgroundColor: '#f2eee4'
     }, input: {
       marginLeft: 25,
       marginRight: 25,

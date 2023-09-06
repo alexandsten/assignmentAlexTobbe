@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Text, View, Button, StyleSheet, FlatList, TextInput } from 'react-native';
+import { Text, View, Button, StyleSheet, FlatList, TextInput, Pressable } from 'react-native';
 import { StartContext } from '../../contexts/StartContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -73,7 +73,6 @@ export const Chat = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Main - home</Text>
       
       <FlatList
         style={{ flex: 1 }}
@@ -89,7 +88,7 @@ export const Chat = () => {
             styles.messageText,
             { textAlign: userID == item.user._id ? 'right' : 'left',
             backgroundColor: userID === item.user._id ? 'green' : 'blue',
-            padding: 10, borderRadius: 10, marginBottom: 5, maxWidth: '100%',color: 'white' },
+            padding: 10, borderRadius: 10, marginBottom: 5,color: 'white' },
           ]}
         
           onPress={() => {
@@ -106,20 +105,26 @@ export const Chat = () => {
       
         )}
       />
+
+      <View style={styles.buttonGroup}>
       <TextInput
         value={userMessage} // Use local state value for TextInput
         style={styles.input}
         onChangeText={(value) => setUserMessage(value)} // Update local state value
       />
-      <Button
-          style={styles.button}
-          title="Send Message"
-          color="green"
+      
+        <Pressable style={styles.button}
+         
           onPress={() => {
             /*   setUserName(textInputValue); // Update context state with the local state value */
             sendChat();
           }}
-        />
+        >
+          <Text style={{textAlign: 'center', color: "white", fontSize: 16, fontWeight: 'bold'}} >Send Message</Text>
+        </Pressable>
+        
+      
+      </View>
       
           
     </View>
@@ -130,18 +135,36 @@ const styles = StyleSheet.create({
     container: {
       flex:1,
       backgroundColor: '#fff',   
-      backgroundColor: '#f2eee4'
+      
     }, input: {
-      marginLeft: 25,
-      marginRight: 25,
-      borderWidth: 1,
-      borderRadius: 10,
+      
+     width: 290,
       borderColor: "black",
-      padding: 18,
+      padding: 10,
+      marginTop: 30,
       backgroundColor: "#EBE9E9",
-      marginHorizontal: 15,
+      borderRadius: 6 ,
       borderWidth: 0.5,
-      marginVertical: 10,
-    }
+      marginRight: 10
+      
+    },
+    button:{
+      width: 100,
+      backgroundColor: 'green',
+      padding: 10,
+      marginTop: 30,
+      
+      borderRadius: 6  
+      },
+    buttonGroup: {
+      
+      flexDirection: "row",
+      justifyContent: "center",
+      marginBottom: 30
+    },
     
   });
+
+  // onPress={() => {
+  //   /*   setUserName(textInputValue); // Update context state with the local state value */
+  //   sendChat();

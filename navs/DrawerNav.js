@@ -10,11 +10,11 @@ const Drawer = createDrawerNavigator();
 export default function DrawerNav() {
   return (
     
-    <Drawer.Navigator>
+    <Drawer.Navigator  >
       
       <Drawer.Screen name="Chat" component={Chat} />
       <Drawer.Screen name="Profil" component={TabNav} />
-      <Drawer.Screen name="Camera" component={CameraView} />
+      <Drawer.Screen  name="Camera" component={CameraView} />
     </Drawer.Navigator>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View, SafeAreaView, Text } from 'react-native';
-import { FontAwesome, Entypo, Feather } from '@expo/vector-icons'; // Import FontAwesome for camera icons
+import { FontAwesome, Entypo, Feather } from '@expo/vector-icons';
 import { Camera, CameraType, FlashMode } from 'expo-camera';
 import { useFocusEffect } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
@@ -8,7 +8,7 @@ import * as MediaLibrary from 'expo-media-library';
 export const CameraView = ({ navigation }) => {
   
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [flash, setFlash] = useState(FlashMode.on); // Updated to use flash modes as strings
+  const [flash, setFlash] = useState(FlashMode.on); 
   const [camera, setCamera] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [hasMediaPermission, setHasMediaPermission] = useState(null);
@@ -24,7 +24,7 @@ export const CameraView = ({ navigation }) => {
     })();
   });
   const onCameraReady = () => {
-    // Camera is ready, you can now take pictures
+    
   };
 
   const takePicture = async () => {
@@ -52,9 +52,9 @@ export const CameraView = ({ navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      // Reinitialize the camera here
+     
       return () => {
-        // Clean up or release the camera when the component loses focus if needed
+        
       };
     }, [])
   );
@@ -70,7 +70,7 @@ export const CameraView = ({ navigation }) => {
           <Camera
             style={styles.cameraContainer}
             type={type}
-            flashMode={flash}  // Use flash state here
+            flashMode={flash}  
             onCameraReady={onCameraReady}
             ref={ref => setCamera(ref)}
           />

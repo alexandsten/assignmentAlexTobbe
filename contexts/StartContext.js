@@ -7,7 +7,7 @@ export const StartContext = createContext()
 
 export const StartProvider = ({children}) => {
   const [accessToken, setAccessToken] = useState(null);
-  const [userID, setUserId] = useState('');
+  const [userID, setUserID] = useState(null);
   const [userName, setUserName] = useState();
   const [userPassword, setUserPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -38,8 +38,8 @@ export const StartProvider = ({children}) => {
       console.log(loginAPI.message)
       loginAPI.status == '200' ? 
       setMessage('') &
-      setUserId(loginAPI.data._id)&
-      await AsyncStorage.setItem('userID', loginAPI.data.accessToken) &
+      setUserID(loginAPI.data._id)&
+      await AsyncStorage.setItem('userID', loginAPI.data._id) &
       setAccessToken(loginAPI.data.accessToken)&
       await AsyncStorage.setItem('accessToken', loginAPI.data.accessToken)
       :
@@ -70,6 +70,10 @@ export const StartProvider = ({children}) => {
     try {
       const token = await AsyncStorage.getItem('accessToken')
       setAccessToken(token)
+      const id = await AsyncStorage.getItem('userID')
+      setUserID(id)
+      console.log('token' + token)
+      console.log('id' + id)
       
     } catch(error) {
       console.log(error)
@@ -111,7 +115,7 @@ export const StartProvider = ({children}) => {
 
   return (
     
-    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID, handleUpdateUsername, firstName, lastName, picture, setPicture}}>
+    <StartContext.Provider value={{accessToken, setAccessToken, handleLogin, handleLogout, userName, setUserName, userPassword, setUserPassword, message, userID, setUserID, handleUpdateUsername, firstName, lastName, picture, setPicture}}>
       {children}
     </StartContext.Provider>
   )

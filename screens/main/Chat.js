@@ -1,12 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, FlatList, TextInput } from 'react-native';
 import { StartContext } from '../../contexts/StartContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const Chat = () => {
-  const { handleLogout, accessToken, userID } = useContext(StartContext);
+  const { accessToken, userID} = useContext(StartContext);
   const [chatData, setChatData] = useState(``);
   const [userMessage, setUserMessage] = useState(``);
+
+  
  
 
   const handleChat = async () => {
@@ -17,8 +20,8 @@ export const Chat = () => {
           'Authorization': 'Bearer ' + accessToken,
         },
       });
+      
       const chatAPI = await response.json();
-      console.log('mitt it är ' + userID)
       setChatData(chatAPI.data);
       
     } catch (error) {

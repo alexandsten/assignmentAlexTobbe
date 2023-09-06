@@ -8,7 +8,7 @@ import DrawerNav from './DrawerNav';
 
 
 export const RootNav = () => {
-  const {accessToken} = useContext(StartContext);
+  const {accessToken, userID} = useContext(StartContext);
 
   return (
     <>

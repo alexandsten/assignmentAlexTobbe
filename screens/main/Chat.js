@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Text, View, Button, StyleSheet, FlatList, TextInput, Pressable } from 'react-native';
+import React, { useContext, useState, useEffect, useRef } from 'react';
+import { Text, View, Button, StyleSheet, FlatList, TextInput, Pressable, ScrollView } from 'react-native';
 import { StartContext } from '../../contexts/StartContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -9,9 +9,11 @@ export const Chat = () => {
   const [chatData, setChatData] = useState(``);
   const [userMessage, setUserMessage] = useState(``);
 
-  
+  const scrollViewRef = useRef();
  
-
+  const scrollToBottom = () => {
+    scrollViewRef.current.scrollToEnd({ animated: true });
+  };
   const handleChat = async () => {
     try {
       const response = await fetch(`https://chat-api-with-auth.up.railway.app/messages`, {
@@ -44,7 +46,7 @@ export const Chat = () => {
       const chatAPI = await response.json();
       console.log('mitt it är ' + userID)
       handleChat()
-      
+      scrollToBottom();
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +75,10 @@ export const Chat = () => {
 
   return (
     <View style={styles.container}>
-      
+      <ScrollView
+        ref={scrollViewRef} 
+        style={{ flex: 1 }}
+      >
       <FlatList
         style={{ flex: 1 }}
         data={chatData}
@@ -92,7 +97,7 @@ export const Chat = () => {
           ]}
         
           onPress={() => {
-            /*   setUserName(textInputValue); // Update context state with the local state value */
+            /*   setUserName(textInputValue);  */
             deleteChat(item._id);
           }}
         
@@ -105,18 +110,19 @@ export const Chat = () => {
       
         )}
       />
+      </ScrollView> 
 
       <View style={styles.buttonGroup}>
       <TextInput
-        value={userMessage} // Use local state value for TextInput
+        value={userMessage} 
         style={styles.input}
-        onChangeText={(value) => setUserMessage(value)} // Update local state value
+        onChangeText={(value) => setUserMessage(value)} 
       />
       
         <Pressable style={styles.button}
          
           onPress={() => {
-            /*   setUserName(textInputValue); // Update context state with the local state value */
+            /*   setUserName(textInputValue); */
             sendChat();
           }}
         >
@@ -126,7 +132,7 @@ export const Chat = () => {
       
       </View>
       
-          
+      
     </View>
   );
 };
@@ -166,5 +172,5 @@ const styles = StyleSheet.create({
   });
 
   // onPress={() => {
-  //   /*   setUserName(textInputValue); // Update context state with the local state value */
+  //   /*   setUserName(textInputValue); //  */
   //   sendChat();

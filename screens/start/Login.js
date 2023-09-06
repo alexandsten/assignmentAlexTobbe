@@ -23,7 +23,7 @@ export const Login = ({ navigation }) => {
     setUserPassword,
     message,
   } = useContext(StartContext);
-  const [textInputValue, setTextInputValue] = useState(""); // Local state for the input value
+  const [textInputValue, setTextInputValue] = useState(""); 
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,25 +55,25 @@ export const Login = ({ navigation }) => {
       <Text style={styles.textInput}>Username</Text>
       <View style={{ marginTop: 5 }}></View>
       <TextInput
-        value={userName} // Use local state value for TextInput
+        value={userName} 
         style={styles.input}
         placeholder="batman"
-        onChangeText={(value) => setUserName(value)} // Update local state value
+        onChangeText={(value) => setUserName(value)} 
       />
       <Text style={styles.textInput}>Password</Text>
       <TextInput
-        value={userPassword} // Use local state value for TextInput
+        value={userPassword} 
         style={styles.input}
         type="password"
         secureTextEntry={true}
         placeholder="batman"
-        onChangeText={(value) => setUserPassword(value)} // Update local state value
+        onChangeText={(value) => setUserPassword(value)} 
       />
       <View style={styles.buttonGroup}>
         <Pressable style={styles.button}
          
           onPress={() => {
-            /*   setUserName(textInputValue); // Update context state with the local state value */
+            /*   setUserName(textInputValue); */
             handleLogin();
           }}
         >

@@ -18,7 +18,7 @@ export const Register = ({ navigation }) => {
     setUserPassword,
     setAccessToken,
   } = useContext(StartContext);
-  const [textInputValue, setTextInputValue] = useState(""); // Local state for the input value
+  const [textInputValue, setTextInputValue] = useState("");
   const [message, setMessage] = useState("");
   const [registerCheck, setRegisterCheck] = useState(null);
 
@@ -88,10 +88,10 @@ export const Register = ({ navigation }) => {
       </Text>
       <Text style={styles.textInput}>Username</Text>
       <TextInput
-        value={userName} // Use local state value for TextInput
+        value={userName}
         style={styles.input}
         placeholder="batman"
-        onChangeText={(value) => setUserName(value)} // Update local state value
+        onChangeText={(value) => setUserName(value)} 
       />
       <Text style={styles.textInput}>Password</Text>
       <TextInput
@@ -99,12 +99,12 @@ export const Register = ({ navigation }) => {
         secureTextEntry={true}
         style={styles.input}
         placeholder="batman"
-        onChangeText={(value) => setUserPassword(value)} // Update local state value
+        onChangeText={(value) => setUserPassword(value)} 
       />
       <Pressable
         style={styles.button}
         onPress={() => {
-          /*   setUserName(textInputValue); // Update context state with the local state value */
+          /*   setUserName(textInputValue);  */
           handleRegister();
           registerCheck !== null
             ? navigation.navigate("Login")

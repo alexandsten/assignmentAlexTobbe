@@ -10,7 +10,6 @@ export const Profile = () => {
 
 
   const handleDelete = async () => {
-    // funktion som hämtar och bearbetar API'et
 
     try {
       const response = await fetch(

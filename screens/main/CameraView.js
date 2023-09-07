@@ -2,40 +2,43 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View, SafeAreaView, Text } from 'react-native';
 import { FontAwesome, Entypo, Feather } from '@expo/vector-icons';
 import { Camera, CameraType, FlashMode } from 'expo-camera';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
 
 export const CameraView = ({ navigation }) => {
-  
+  const isFocused = useIsFocused();
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(FlashMode.on); 
   const [camera, setCamera] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [hasMediaPermission, setHasMediaPermission] = useState(null);
 
-  useEffect(() => {   // går igenom kamerans tillstånd till mobilen
+  useEffect(() => {
     (async () => {
       const CameraPermissions = await Camera.requestCameraPermissionsAsync();
       setHasCameraPermission(CameraPermissions.status == 'granted')
       const MediaPermissions = await MediaLibrary.requestPermissionsAsync();
       setHasMediaPermission(MediaPermissions.status == 'granted')
     })();
-  });
+  }, []);
+
 
   const onCameraReady = () => {
-    
+    // Camera is ready
   };
 
-  const takePicture = async () => { // tar foto
+ 
+  const takePicture = async () => {
     if (camera) {
       try {
-        const picture = await camera.takePictureAsync();
-        navigation.navigate("ImagePreview", { picture });
+        const { uri } = await camera.takePictureAsync();
+        navigation.navigate("ImagePreview", { picture: { uri } });
       } catch (error) {
-        console.log(error);
+        console.log('Error taking picture:', error);
       }
     }
   };
+
 
   const toggleCameraType = () => {    // byter mellan front cam och back cam
     setType(currentType =>
@@ -58,7 +61,10 @@ export const CameraView = ({ navigation }) => {
     }, [])
   );
 
-  return (
+
+  if (isFocused == true ) {
+    {
+      return (
     <SafeAreaView style={styles.container}>
       {hasCameraPermission === null ? (
         <Text>Requesting camera permission...</Text>
@@ -94,6 +100,12 @@ export const CameraView = ({ navigation }) => {
       )}
     </SafeAreaView>
   );
+    }
+  } else {
+    return (<View><Text>Permissions denied....</Text></View>);
+  }
+   
+  
 };
 
 const styles = StyleSheet.create({

@@ -46,7 +46,7 @@ export const Register = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{message}</Text>
+      
       <Text
         style={{
           color: "black",
@@ -86,6 +86,7 @@ export const Register = ({ navigation }) => {
         placeholder="batman"
         onChangeText={(value) => setUserPassword(value)} 
       />
+      <Text style={{textAlign: 'center', color: 'gray', fontSize: 16}}>{message}</Text>
       <Pressable
         style={styles.button}
         onPress={() => {

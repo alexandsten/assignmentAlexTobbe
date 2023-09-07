@@ -15,7 +15,7 @@ export const Login = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{message}</Text>
+      
       <Text
         style={{
           color: "black",
@@ -42,6 +42,7 @@ export const Login = ({ navigation }) => {
       </Text>
       <Text style={styles.textInput}>Username</Text>
       <View style={{ marginTop: 5 }}></View>
+      
       <TextInput
         value={userName} 
         style={styles.input}
@@ -57,6 +58,7 @@ export const Login = ({ navigation }) => {
         placeholder="batman"
         onChangeText={(value) => setUserPassword(value)} 
       />
+      <Text style={{textAlign: 'center', color: 'gray', fontSize: 16}}>{message}</Text>
       <View style={styles.buttonGroup}>
         <Pressable style={styles.button}
          

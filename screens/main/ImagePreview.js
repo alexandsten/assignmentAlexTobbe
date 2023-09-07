@@ -6,31 +6,27 @@ import * as MediaLibrary from 'expo-media-library';
 export const ImagePreview = ({ route, navigation }) => {
   const [picture, setPicture] = useState(route.params.picture);
 
+
+  // sparar användarens foto i mobilen
   const savePicture = async () => {
     try {
-      // Create an asset out of the picture
       const asset = await MediaLibrary.createAssetAsync(picture.uri);
-
-      // Retrieve an existing album or create one
       const album = await MediaLibrary.getAlbumAsync('Expo');
-
       if (album == null) {
         await MediaLibrary.createAlbumAsync('Expo', asset, false);
       } else {
-        // Put the asset (picture) in the album
         await MediaLibrary.addAssetsToAlbumAsync(asset, album.id, false);
       }
-
-      // Clear the picture state
       setPicture(null);
-      navigation.navigate("Profil"); // Navigate back to the CameraView component
+      navigation.navigate("Profil"); 
     } catch (error) {
       console.log(error);
     }
   };
 
+
+  // raderar användarens foto
   const deletePicture = () => {
-    // Clear the picture state
     setPicture(null);
     navigation.goBack();
   };
@@ -53,7 +49,6 @@ export const ImagePreview = ({ route, navigation }) => {
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
     container: {

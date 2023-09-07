@@ -11,20 +11,13 @@ import {
 import { StartContext } from "../../contexts/StartContext";
 
 export const Register = ({ navigation }) => {
-  const {
-    userName,
-    setUserName,
-    userPassword,
-    setUserPassword,
-    setAccessToken,
-  } = useContext(StartContext);
-  const [textInputValue, setTextInputValue] = useState("");
+  const { userName, setUserName,  userPassword, setUserPassword} = useContext(StartContext);
   const [message, setMessage] = useState("");
   const [registerCheck, setRegisterCheck] = useState(null);
 
-  const handleRegister = async () => {
-    // funktion som hämtar och bearbetar API'et
 
+  // registrerar en ny användare
+  const handleRegister = async () => {
     try {
       console.log(userName);
 

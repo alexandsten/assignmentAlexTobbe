@@ -168,6 +168,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   messageText: {
-    // Your message text styles here
+    
   },
 });

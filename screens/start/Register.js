@@ -1,13 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  TextInput,
-  SafeAreaView,
-  Pressable,
-} from "react-native";
+import { Text,  StyleSheet,  TextInput,SafeAreaView, Pressable,} from "react-native";
 import { StartContext } from "../../contexts/StartContext";
 
 export const Register = ({ navigation }) => {

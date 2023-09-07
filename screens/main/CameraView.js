@@ -24,11 +24,11 @@ export const CameraView = ({ navigation }) => {
 
 
   const onCameraReady = () => {
-    // Camera is ready
+    // kamera redo
   };
 
  
-  const takePicture = async () => {
+  const takePicture = async () => { // tar bild och navigerar till imagePreview
     if (camera) {
       try {
         const { uri } = await camera.takePictureAsync();

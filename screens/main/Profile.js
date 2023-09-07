@@ -9,6 +9,7 @@ export const Profile = () => {
   const [newLastName, setNewLastName] = useState('');
 
 
+  // raderar den inloggade användarens konto
   const handleDelete = async () => {
 
     try {
@@ -36,24 +37,19 @@ export const Profile = () => {
 
   return (
     <SafeAreaView>
-
-
       <Text style={{ fontSize: 20 }}> {firstName} {lastName} </Text>
-
       <Text style={{ fontSize: 20 }}> First name: </Text>
       <TextInput
         style={styles.input}
         value={newUserName}
         onChangeText={setNewUserName}
       />
-
 <Text style={{ fontSize: 20 }}> Last name: </Text>
       <TextInput
         style={styles.input}
         value={newLastName}
         onChangeText={setNewLastName}
       />
-
 <Pressable
         style={styles.button}
         onPress={() => {

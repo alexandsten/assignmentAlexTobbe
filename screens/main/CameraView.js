@@ -13,21 +13,20 @@ export const CameraView = ({ navigation }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [hasMediaPermission, setHasMediaPermission] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => {   // går igenom kamerans tillstånd till mobilen
     (async () => {
       const CameraPermissions = await Camera.requestCameraPermissionsAsync();
       setHasCameraPermission(CameraPermissions.status == 'granted')
       const MediaPermissions = await MediaLibrary.requestPermissionsAsync();
       setHasMediaPermission(MediaPermissions.status == 'granted')
-      // console.log(CameraPermissions);
-      // console.log(MediaPermissions);
     })();
   });
+
   const onCameraReady = () => {
     
   };
 
-  const takePicture = async () => {
+  const takePicture = async () => { // tar foto
     if (camera) {
       try {
         const picture = await camera.takePictureAsync();
@@ -38,7 +37,7 @@ export const CameraView = ({ navigation }) => {
     }
   };
 
-  const toggleCameraType = () => {
+  const toggleCameraType = () => {    // byter mellan front cam och back cam
     setType(currentType =>
       currentType === Camera.Constants.Type.back
         ? Camera.Constants.Type.front
@@ -46,7 +45,7 @@ export const CameraView = ({ navigation }) => {
     );
   };
 
-  const toggleFlash = () => {
+  const toggleFlash = () => {   // stänger av och på blixten
     setFlash(current => (current === FlashMode.off ? FlashMode.on : FlashMode.off));
   };
 

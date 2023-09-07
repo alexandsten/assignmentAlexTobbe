@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View } from 'react-native';
 
 export const StartContext = createContext()
 
@@ -18,7 +17,6 @@ export const StartProvider = ({children}) => {
   const [picture, setPicture] = useState(null);
   
   const handleLogin = async () => {   // funktion som hämtar och bearbetar API'et
-    
     try {
       console.log(userName)
       
@@ -49,12 +47,20 @@ export const StartProvider = ({children}) => {
       setFirstName(loginAPI.data.username) & setLastName(loginAPI.data.lastname) :
       console.log("namn finns ej")
 
+      if (loginAPI.data.firstname) {
+      setFirstName(loginAPI.data.firstname)
+      await AsyncStorage.setItem('firstName', loginAPI.data.firstname)
+      setLastName(loginAPI.data.lastname)
+      await AsyncStorage.setItem('lastName', loginAPI.data.lastname)
+      } else {
+        console.log('no names')
+      }
     } catch(error) {
       console.log(error)
     }
   }
 
-  const handleLogout = async () => {
+  const handleLogout = async () => {  // hanterar användarens utloggning
     console.log('handleLogout')
 
     try {
@@ -65,18 +71,24 @@ export const StartProvider = ({children}) => {
     }
   }
 
-  const isLoggedIn = async () => {
+// kontrollerar om användaren är inloggad, och bearbetar dess värden och cookies
+  const isLoggedIn = async () => {  
     console.log('isLoggedIn')
     try {
       const token = await AsyncStorage.getItem('accessToken')
       setAccessToken(token)
       const id = await AsyncStorage.getItem('userID')
       setUserID(id)
-      console.log('token' + token)
-      console.log('id' + id)
-      
     } catch(error) {
       console.log(error)
+    }
+    try {
+       const first = await AsyncStorage.getItem('firstName')
+        setFirstName(first)
+        const last = await AsyncStorage.getItem('lastName')
+        setLastName(last)
+    } catch {
+      console.log('no names')
     }
   }
 
@@ -84,6 +96,8 @@ export const StartProvider = ({children}) => {
     isLoggedIn();
   }, [])
   
+
+  // uppdaterar användarens för och efternamn
   const handleUpdateUsername = async (newUserName, newLastName) => {
     console.log("New Username:", newUserName);
     try {
@@ -102,7 +116,9 @@ export const StartProvider = ({children}) => {
       if (response.status === 200) {
         console.log("du har uppdaterat ditt namn")
         setFirstName(newUserName)
+        await AsyncStorage.setItem('firstName', newUserName)
         setLastName(newLastName)
+        await AsyncStorage.setItem('lastName', newLastName)
       } else {
         console.log("Error updating username");
       }

@@ -1,17 +1,5 @@
 import React, { useContext, useState } from "react";
-
-import {
-  Text,
-  SafeAreaView,
-  View,
-  Button,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  useEffect,
-  Pressables,
-  Pressable
-} from "react-native";
+import {Text, SafeAreaView, View,TextInput, StyleSheet, Pressable} from "react-native";
 import { StartContext } from "../../contexts/StartContext";
 
 export const Login = ({ navigation }) => {
@@ -72,11 +60,7 @@ export const Login = ({ navigation }) => {
       <View style={styles.buttonGroup}>
         <Pressable style={styles.button}
          
-          onPress={() => {
-            /*   setUserName(textInputValue); */
-            handleLogin();
-          }}
-        >
+          onPress={() => { handleLogin(); }} >
         <Text style={{textAlign: 'center', color: "white", fontSize: 16, fontWeight: 'bold'}} >LogIn</Text>
         </Pressable>
         <Pressable style={{marginTop: 15}}
